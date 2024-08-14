@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<fieldset class="fieldset">
+    <a href="{% url 'addsemester'%}"><h1 class="tablink" onclick="openPage('new')" id="defaultOpen">Add Semester</h1></a>
+    <div class="tabcontent" id="edit">
+        <table class="table1">
+            <thead>
+            <tr class="table-headers">
+            <th>Semester</th>
+            <th  class="empty"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for sem in semesters %}
+            <tr>
+             <td>{{sem.semester}}</td>
+             <td class="empty">
+                <form action="{% url 'deletesemester' sem.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="X" class="cross">
+                </form>
+             </td>
+             </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</fieldset>
+
+<div class="img">
+
+</div>
+
+{% endblock %}

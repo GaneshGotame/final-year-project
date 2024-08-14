@@ -1,0 +1,42 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+{% for selectsemester in selectsemesters %}
+<h2 class="secHead">{{ selectsemester.select_semester_id }} ({{ selectsemester.semester }})</h2>
+    <table class="table2">
+      <colgroup>
+        <col >
+        <col >
+        <col>
+        <col>
+        <col >
+        <col>
+      </colgroup>
+      <tr>
+        <th>Class #</th>
+        <th>Course</th>
+        <th>Venue(Block- Room)</th>
+        <th>Instructor</th>
+        <th>Class Timing</th>
+      </tr>
+      {% for class in schedule %}
+        {% if class.selectsemester == selectsemester.select_semester_id %}
+        <tr>
+          <th>{{class.select_semester_id}}</th>
+          <td>{{class.course}}</td>
+          <td>{{class.room}}</td>
+          <td>{{class.instructor}}</td>
+          <td>{{class.meeting_time}}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </table>
+
+{% endfor %}
+  <div class="extra">
+
+  </div>
+{% endblock %}

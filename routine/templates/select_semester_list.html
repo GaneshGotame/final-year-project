@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<fieldset class="fieldset">
+    <a href="{% url 'addselectsemester'%}"><h1 class="tablink" onclick="openPage('new')" id="defaultOpen">Select Semester</h1></a>
+    <div class="tabcontent" id="edit">
+        <table class="table1">
+            <thead>
+            <tr class="table-headers">
+            <th>Semester Id</th>
+            <th>Semester</th>
+            <th>Total Classes</th>
+            <th  class="empty"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for selsem in selectsemesters %}
+            <tr>
+             <td>{{selsem.select_semester_id}}</td>
+             <td>{{selsem.semester}}</td>
+             <td>{{selsem.num_class_in_week }}</td>
+             <td class="empty">
+                <form action="{% url 'deleteselectsemester' selsem.select_semester_id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="X" class="cross">
+                </form>
+             </td>
+             </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</fieldset>
+
+<div class="img">
+
+</div>
+
+{% endblock %}
